@@ -15,12 +15,14 @@ def check(string, filenames):
         get_stats(res, filenames)
         return True
     return False
-
-with open("data.txt") as f:
-    for string in f:
-        print('---------------------------------------------------------')
-        print(string.rstrip('\n'))
-        print(check(string, filename))
+try:
+    with open("data.txt") as f:
+        for string in f:
+            print('---------------------------------------------------------')
+            print(string.rstrip('\n'))
+            print(check(string, filename))
+except IOError as e:
+    print("No file found")
 
 print('---------------------------------------------------------')
 print(filename)
