@@ -1,0 +1,55 @@
+%start Map1::Start
+%class AppClass
+
+%map Map1
+%%
+// State        Transition      End State       Action(s)
+Start
+{
+                header(counter : int, c : char)[counter == 0 and c == "n"]               nil     {Counter();}
+		header(counter : int, c : char)[counter == 1 and c == "f"]               nil     {Counter();}
+		header(counter : int, c : char)[counter == 2 and c == "s"]               nil     {Counter();}
+		header(counter : int, c : char)[counter == 3 and c == ":"]               nil     {Counter();}
+		header(counter : int, c : char)[counter == 4 and c == "/"]               nil     {Counter();}
+		header(counter : int, c : char)[counter == 5 and c == "/"]               Serv_name     {ResetCounter();}
+}
+
+
+Serv_name
+{
+                symb(c : char, counter : int) [(c >= "a" and c<="z") or (c >= "A" and c<="Z") and counter <= 15]               nil     {Counter();}
+		symb(c : char, counter : int) [c == "/"]				Cat_name	{ResetCounter();}
+}
+
+Cat_name
+{
+                symb(c : char, counter : int) [((c >= "a" and c<="z") or (c >= "A" and c<="Z") or c == "_" or c == ".") and counter <= 20]               nil     {Counter();}
+		symb(c : char, counter : int) [c == "/"]				File_name	{ResetCounter();}
+		EOS(counter : int) [counter <= 12]					OK			{Acceptable(); Save_name();}
+		symb(c : char, counter : int)[c == '\n' and counter <= 12]		OK			{Acceptable(); Save_name();}
+				
+}
+
+File_name
+{
+                symb(c : char, counter : int) [((c >= "a" and c<="z") or (c >= "A" and c<="Z") or c == "_" or c == ".") and counter <= 12]               nil     {Counter();}
+		EOS(counter : int)						OK				{Acceptable(); Save_name();}
+		symb(c : char, counter : int)[c == '\n']			OK				{Acceptable(); Save_name();}
+}
+
+OK
+{}
+
+Error
+{
+                EOS(counter : int)             nil             {Unacceptable();}
+}
+
+Default
+{
+		header(counter : int, c : char)		Error		{}
+                symb(c : char, counter : int)		Error           {Unacceptable();}
+		EOS(counter : int)	         	Error           {Unacceptable();}
+}
+
+%%
