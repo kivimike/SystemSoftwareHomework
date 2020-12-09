@@ -92,7 +92,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606839777833</updated>
-      <workItem from="1606839780444" duration="21666000" />
+      <workItem from="1606839780444" duration="26615000" />
+      <workItem from="1607263979312" duration="23000" />
+      <workItem from="1607338829679" duration="16780000" />
     </task>
     <servers />
   </component>
@@ -108,41 +110,49 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="611" y="303" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.0.1536.824@0.0.1536.824" timestamp="1606855932887" />
-    <state width="1493" height="267" key="GridCell.Tab.0.bottom" timestamp="1606893990953">
+    <state width="1493" height="314" key="GridCell.Tab.0.bottom" timestamp="1607458501191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606893990953" />
-    <state width="1493" height="267" key="GridCell.Tab.0.center" timestamp="1606893990952">
+    <state width="1493" height="314" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607458501191" />
+    <state width="1493" height="314" key="GridCell.Tab.0.center" timestamp="1607458501191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606893990952" />
-    <state width="1493" height="267" key="GridCell.Tab.0.left" timestamp="1606893990952">
+    <state width="1493" height="314" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607458501191" />
+    <state width="1493" height="314" key="GridCell.Tab.0.left" timestamp="1607458501191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606893990952" />
-    <state width="1493" height="267" key="GridCell.Tab.0.right" timestamp="1606893990952">
+    <state width="1493" height="314" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607458501191" />
+    <state width="1493" height="314" key="GridCell.Tab.0.right" timestamp="1607458501191">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="267" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606893990952" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1606893190098">
+    <state width="1493" height="314" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607458501191" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1607175403306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606893190098" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1606893190098">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607175403306" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1607175403306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1606893190098" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1606893190098">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607175403306" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1607175403306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1606893190098" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1606893190098">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607175403306" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1607175403306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1606893190098" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607175403306" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1607263984476">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1607263984476" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606898279893">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606898279893" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SSLab2F$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1606893990935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SSLab2F$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1607458501171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SSLab2F$test.coverage" NAME="test Coverage Results" MODIFIED="1606851117336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
