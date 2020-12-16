@@ -1,5 +1,6 @@
 import lex
 import yacc
+
 '''Разработать библиотеку для работы с регулярными выражениями. В качестве алфавита могут использовать любые печатные символы, метасимволы экранируются символом ‘&’.
 
 Регулярный выражения должны поддерживать следующие операции:
@@ -20,8 +21,7 @@ findall – поиск всех непересекающихся вхожден�
  
 
 Регулярные выражения могут быть заранее скомпилированы в ДКА непосредственно, без построения НКА (РВ->ДКА->минимальный ДКА).'''
-tokens = ('OR', 'POSCLOS', 'OPTIONAL', 'CHAR', 'RPAREN', 'LPAREN', 'NAME', 'SYMB', 'REPEAT')
-
+tokens = ('OR', 'POSCLOS', 'OPTIONAL', 'CHAR', 'RPAREN', 'LPAREN', 'NAME', 'SYMB', 'REPEAT', 'EOS')
 
 last_paren_type = ''
 ErrorsList = []
@@ -32,6 +32,7 @@ t_POSCLOS = r'\+'
 t_OPTIONAL = r'\?'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
+t_EOS    = r'\$'
 
 
 def t_NAME(t):
@@ -39,9 +40,8 @@ def t_NAME(t):
     t.value = str(t.value)[1:-1]
     return t
 
-
 def t_SYMB(t):
-    r"(&[.?|+&{}()<>])|([^<>.?+|&(){}])"
+    r"(&[.?|+&{}$()<>])|([^<>.?+|&()${}])"
     sym = str(t.value)
     if len(sym) > 1:
         sym = sym[1]
@@ -51,7 +51,7 @@ def t_SYMB(t):
 
 def t_REPEAT(t):
     r"\{(([0-9]+)?,([0-9]+)?)?\}"
-    #print(t.value)
+    # print(t.value)
     bounds = str(t.value)[1:-1]
     if bounds:
         lower, upper = bounds.split(",")
@@ -71,106 +71,139 @@ def t_REPEAT(t):
         return t
     else:
         ErrorsList.append(t.value)
-        print("ERROR! LOWER BOUND > UPPER BOUND "+ str(lower)+'>'+ str(upper))
-#проверить, что нижняя меньше верхнйе
+        print("ERROR! LOWER BOUND > UPPER BOUND " + str(lower) + '>' + str(upper))
+
+
+# проверить, что нижняя меньше верхнйе
 
 def t_error(t):
     global ErrorsList
     ErrorsList.append("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
+
 lexer = lex.lex()
 
+#     print(tok)
+#         break
+#     if not tok:
+#     tok = lexer.token()
+# while True:
 
-if __name__ == "__main__":
-    data = 'me+|p(hi)+'
-    #data = '(())'
-    ls = []
-    lexer.input(data)
-
-    # while True:
-    #     tok = lexer.token()
-    #     if not tok:
-    #         break
-    #     print(tok)
-    for token in lexer:
-        ls.append(token)
 
 print(ErrorsList)
 
+
 def dfs(nod, iter):
     if nod.children != []:
-        print(iter * "\t" + "Node " + str(nod.value) + ", type: " + str(nod.type) + ", children: ")
+        print(
+            iter * "\t" + "Node " + str(nod.id) + ", type " + str(nod.type) + ', val ' + str(nod.value) + ', F: ' + str(
+                nod.F) + ', children: ')
         for child in nod.children:
-            dfs(child, iter+1)
+            dfs(child, iter + 1)
     else:
-        print(iter * "\t" + "Node " + str(nod.value) + ", type: " + str(nod.type))
+        print(
+            iter * "\t" + "Node " + str(nod.id) + ", type " + str(nod.type) + ', val ' + str(nod.value) + ', F: ' + str(
+                nod.F) + ', in N: ' + ", position " + str(nod.position))
 
 
 def dfs_start(nod):
     dfs(nod, 0)
 
+
+node_id = 0
+
+
 class Node:
     def __init__(self):
+        global node_id
         self.value = None
         self.type = None
         self.children = []
+        # node_id += 1
+        self.position = None
+        self.F = set()
+        # self.L = set()
 
-
-    def update(self, value, type, children):
+    def update(self, value, type, children, position):
+        self.id = node_id
         self.value = value
         self.type = type
         self.children = children
+        self.position = position
 
+    def set_F(self, F):
+        if isinstance(F, set):
+            self.F = F
+        else:
+            raise Exception("Passed non-set to Node.set_F(self, set)")
 
     def __str__(self):
         if self.children == []:
-            return str(self.type) + ', val ' + str(self.value)
+            return "Node " + str(self.id) + ", type " + str(self.type) + ', val ' + str(
+                self.value) + ", position " + str(self.position)
         else:
             children = ''
             for node in self.children:
                 children += str(node) + '; '
-            return str(self.type) + ', val ' + str(self.value) + ', children: \n [' + children + ']'
+            return "Node " + str(self.id) + ", type " + str(self.type) + ', val ' + str(
+                self.value) + ', children: \n [' + children + ']'
+
 
 def process_no_paren(tokens):
-    for i in range(len(tokens)):
-        if not isinstance(tokens[i], Node):
-            if tokens[i].type == "SYMB":
-                token_copy = tokens[i]
-                tokens[i] = Node()
-                tokens[i].update(token_copy.value, "Symbol", [])
-    i = 0
-    while i < len(tokens):
-        if i-1 >= 0 and i < len(tokens):
-            if not isinstance(tokens[i], Node):
-                if tokens[i].type == "POSCLOS" and isinstance(tokens[i-1], Node):
-                    tokens[i] = Node()
-                    tokens[i].update(None, "PlusNode", [tokens[i-1]])
-                    tokens.pop(i-1)
-                    i-=1
-        i+=1
-    i = 0
-    while i < len(tokens):
-        if i+1 < len(tokens):
-            if isinstance(tokens[i], Node) and isinstance(tokens[i+1], Node):
-                token_copy = tokens[i]
-                tokens[i] = Node()
-                tokens[i].update(None, "Concat", [token_copy, tokens[i+1]])
-                tokens.pop(i+1)
-                i-=1
-        i+=1
-    i = 0
-    while i < len(tokens):
-        if i+2 < len(tokens):
-            if isinstance(tokens[i], Node) and tokens[i+1].type == "OR" and isinstance(tokens[i+2], Node):
-                token_copy = tokens[i]
-                tokens[i] = Node()
-                tokens[i].update(None, "Or", [token_copy, tokens[i+2]])
-                tokens.pop(i+1)
-                tokens.pop(i+1)
-                i-=1
-        i+=1
+    global node_id
+    # for i in range(len(tokens)):
+    #     if not isinstance(tokens[i], Node):
+    #         if tokens[i].type == "SYMB":
+    #             token_copy = tokens[i]
+    #             tokens[i] = Node()
+    #             tokens[i].update(token_copy.value, "Symbol", [])
 
+    i = 0
+    while i < len(tokens):
+        if i - 1 >= 0 and i < len(tokens):
+            if not isinstance(tokens[i], Node):
+                if tokens[i].type == "POSCLOS" and isinstance(tokens[i - 1], Node):
+                    tokens[i] = Node()
+                    tokens[i].update(None, "PlusNode", [tokens[i - 1]], None)
+                    node_id += 1
+                    tokens.pop(i - 1)
+                    i -= 1
+        i += 1
+    i = 0
+    while i < len(tokens):
+        if i - 1 >= 0 and i < len(tokens):
+            if not isinstance(tokens[i], Node):
+                if tokens[i].type == "OPTIONAL" and isinstance(tokens[i - 1], Node):
+                    tokens[i] = Node()
+                    tokens[i].update(None, "OptNode", [tokens[i - 1]], None)
+                    node_id += 1
+                    tokens.pop(i - 1)
+                    i -= 1
+        i += 1
+    i = 0
+    while i < len(tokens):
+        if i + 1 < len(tokens):
+            if isinstance(tokens[i], Node) and isinstance(tokens[i + 1], Node):
+                token_copy = tokens[i]
+                tokens[i] = Node()
+                tokens[i].update(None, "ConcatNode", [token_copy, tokens[i + 1]], None)
+                node_id += 1
+                tokens.pop(i + 1)
+                i -= 1
+        i += 1
+    i = 0
+    while i < len(tokens):
+        if i + 2 < len(tokens):
+            if isinstance(tokens[i], Node) and tokens[i + 1].type == "OR" and isinstance(tokens[i + 2], Node):
+                token_copy = tokens[i]
+                tokens[i] = Node()
+                tokens[i].update(None, "OrNode", [token_copy, tokens[i + 2]], None)
+                node_id += 1
+                tokens.pop(i + 1)
+                tokens.pop(i + 1)
+                i -= 1
+        i += 1
     return tokens
 
 
@@ -182,10 +215,10 @@ def process_in_paren(tokens):
     for i in range(len(tokens)):
         if tokens[i].type == "LPAREN":
             l_idx = i
-            c_l+=1
+            c_l += 1
         elif tokens[i].type == "RPAREN":
-            c_r+=1
-    if c_r !=  c_l:
+            c_r += 1
+    if c_r != c_l:
         raise Exception("NUMBER OF LPAREN AND RPAREN DOESNT MATCH")
     if c_l == 0:
         return process_no_paren(tokens)
@@ -195,13 +228,173 @@ def process_in_paren(tokens):
             break
     new_tokens = []
     new_tokens += tokens[:l_idx]
-    new_tokens+=process_no_paren(tokens[l_idx+1:r_idx])
-    new_tokens += tokens[r_idx+1:]
+    new_tokens += process_no_paren(tokens[l_idx + 1:r_idx])
+    new_tokens += tokens[r_idx + 1:]
     return process_in_paren(new_tokens)
 
-print(data)
-dfs_start(process_in_paren(ls)[0])
+
+def create_nullable_rec(rootnode):
+    global N
+    if rootnode.type == "OptNode":
+        create_nullable_rec(rootnode.children[0])
+        N.add(rootnode)
+        return True
+    if rootnode.type == "Epsilon":
+        N.add(rootnode)
+        return True
+    elif rootnode.type == "Symbol":
+        return False
+    elif rootnode.type == "OrNode":
+        flag = False
+        for child in rootnode.children:
+            belongs = create_nullable_rec(child)
+            if belongs:
+                flag = True
+        if flag:
+            N.add(rootnode)
+            return True
+        else:
+            return False
+    elif rootnode.type == "ConcatNode":
+        flag = True
+        for child in rootnode.children:
+            belongs = create_nullable_rec(child)
+            if not belongs:
+                flag = False
+        if flag:
+            N.add(rootnode)
+            return True
+        else:
+            return False
+    elif rootnode.type == "PlusNode":
+        belongs = create_nullable_rec(rootnode.children[0])
+        if belongs:
+            N.add(rootnode)
+            return True
+        else:
+            return False
 
 
+def create_first_rec(rootnode):
+    global N
+    global F_for_nodes
+    if rootnode.type == "OptNode":
+        create_first_rec(rootnode.children[0])
+        F_for_nodes.update([(rootnode, F_for_nodes[rootnode.children[0]])])
+    elif rootnode.type == "Epsilon":
+        F_for_nodes.update([(rootnode, set())])
+    elif rootnode.type == "Symbol":
+        F_for_nodes.update([(rootnode, set([rootnode.position]))])
+    elif rootnode.type == "OrNode":
+        buf = set()
+        for child in rootnode.children:
+            create_first_rec(child)
+            buf = buf.union(F_for_nodes[child])
+        F_for_nodes.update([(rootnode, buf)])
+    elif rootnode.type == "ConcatNode":
+        create_first_rec(rootnode.children[0])
+        create_first_rec(rootnode.children[1])
+        buf = F_for_nodes[rootnode.children[0]]
+        if rootnode.children[0] in N:
+            buf = buf.union(F_for_nodes[rootnode.children[1]])
+        F_for_nodes.update([(rootnode, buf)])
+    elif rootnode.type == "PlusNode":
+        create_first_rec(rootnode.children[0])
+        F_for_nodes.update([(rootnode, F_for_nodes[rootnode.children[0]])])
 
-#process_no_paren(ls)
+
+def create_last_rec(rootnode):
+    global N
+    global L_for_nodes
+    if rootnode.type == "OptNode":
+        create_last_rec(rootnode.children[0])
+        L_for_nodes.update([(rootnode, L_for_nodes[rootnode.children[0]])])
+    elif rootnode.type == "Epsilon":
+        L_for_nodes.update([(rootnode, set())])
+    elif rootnode.type == "Symbol":
+        L_for_nodes.update([(rootnode, set([rootnode.position]))])
+    elif rootnode.type == "OrNode":
+        buf = set()
+        for child in rootnode.children:
+            create_last_rec(child)
+            buf = buf.union(L_for_nodes[child])
+        L_for_nodes.update([(rootnode, buf)])
+    elif rootnode.type == "ConcatNode":
+        create_last_rec(rootnode.children[0])
+        create_last_rec(rootnode.children[1])
+        buf = L_for_nodes[rootnode.children[1]]
+        if rootnode.children[1] in N:
+            buf = buf.union(L_for_nodes[rootnode.children[0]])
+        L_for_nodes.update([(rootnode, buf)])
+    elif rootnode.type == "PlusNode":
+        create_last_rec(rootnode.children[0])
+        L_for_nodes.update([(rootnode, L_for_nodes[rootnode.children[0]])])
+
+def create_FP(rootnode):
+    global pos_set
+    global F_for_nodes
+    global L_for_nodes
+    for child in rootnode.children:
+        create_FP(child)
+    if rootnode.type == "ConcatNode":
+        for p in L_for_nodes[rootnode.children[0]]:
+            for q in F_for_nodes[rootnode.children[1]]:
+                pos_set[p].add(q)
+    elif rootnode.type == "PlusNode":
+        for p in L_for_nodes[rootnode.children[0]]:
+            for q in F_for_nodes[rootnode.children[0]]:
+                pos_set[p].add(q)
+
+
+def get_symbol_pos(data):
+    ls = []
+    symbol_pos = {}
+    lexer.input(data)
+    for token in lexer:
+        ls.append(token)
+    c = 0
+    for i in range(len(ls)):
+        if ls[i].type == "SYMB":
+            symbol_pos.update([(c, ls[i].value)])
+            c += 1
+    return symbol_pos
+
+pos_set = dict()
+'''____'''
+# data = 'me+|p(hi)+x?'
+# # data = '(())'
+# ls = []
+# symbol_pos = {}
+# lexer.input(data)
+# pos_set = dict()
+# for token in lexer:
+#     ls.append(token)
+# c = 0
+# for i in range(len(ls)):
+#     if not isinstance(ls[i], Node):
+#         if ls[i].type == "SYMB":
+#             token_copy = ls[i]
+#             ls[i] = Node()
+#             ls[i].update(token_copy.value, "Symbol", [], c)
+#             node_id += 1
+#             pos_set.update([(c, set())])
+#             c += 1
+'''----'''
+
+N = set()
+F_for_nodes = dict()
+L_for_nodes = dict()
+#print(data, len(data))
+# rt_node = process_in_paren(ls)[0]
+# create_nullable_rec(rt_node)
+#create_first_rec(rt_node)
+#create_last_rec(rt_node)
+#create_FP(rt_node)
+#for item in pos_set:
+#    print(item)
+#    print(pos_set[item])
+'''------'''
+# print(N)
+# for i in list(N):
+#     print(i)
+# process_no_paren(ls)
