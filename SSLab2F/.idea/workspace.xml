@@ -24,6 +24,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -97,9 +98,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_range" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="SSLab2F" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_range.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.FSM" />
+        <item itemvalue="Python.test_range" />
         <item itemvalue="Python.lexer" />
         <item itemvalue="Python.test" />
       </list>
@@ -120,7 +144,8 @@
       <workItem from="1607338829679" duration="19371000" />
       <workItem from="1607632144703" duration="8170000" />
       <workItem from="1607791628615" duration="7175000" />
-      <workItem from="1608050543451" duration="19135000" />
+      <workItem from="1608050543451" duration="22354000" />
+      <workItem from="1608577222229" duration="35113000" />
     </task>
     <servers />
   </component>
@@ -128,6 +153,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608731226086">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1608731226086" />
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606889406692">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -136,58 +165,63 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="611" y="303" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.0.1536.824@0.0.1536.824" timestamp="1606855932887" />
-    <state width="1493" height="129" key="GridCell.Tab.0.bottom" timestamp="1608103129281">
+    <state width="1493" height="369" key="GridCell.Tab.0.bottom" timestamp="1609080861687">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="129" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608103129281" />
-    <state width="1493" height="129" key="GridCell.Tab.0.center" timestamp="1608103129281">
+    <state width="1493" height="369" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609080861687" />
+    <state width="1493" height="369" key="GridCell.Tab.0.center" timestamp="1609080861686">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="129" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1608103129281" />
-    <state width="1493" height="129" key="GridCell.Tab.0.left" timestamp="1608103129280">
+    <state width="1493" height="369" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609080861686" />
+    <state width="1493" height="369" key="GridCell.Tab.0.left" timestamp="1609080861686">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="129" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1608103129280" />
-    <state width="1493" height="129" key="GridCell.Tab.0.right" timestamp="1608103129281">
+    <state width="1493" height="369" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609080861686" />
+    <state width="1493" height="369" key="GridCell.Tab.0.right" timestamp="1609080861686">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="129" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1608103129281" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1608078983661">
+    <state width="1493" height="369" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609080861686" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1609016812998">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1608078983661" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1608078983661">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609016812998" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1609016812998">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1608078983661" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1608078983660">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1609016812998" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1609016812998">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1608078983660" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1608078983661">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1609016812998" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1609016812998">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1608078983661" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1609016812998" />
+    <state x="277" y="55" key="SettingsEditor" timestamp="1609016657062">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1609016657062" />
     <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1607263984476">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1607263984476" />
-    <state x="410" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1608055041092">
+    <state x="410" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609013943724">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="410" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1608055041092" />
+    <state x="410" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1609013943724" />
     <state x="361" y="71" key="scopes" timestamp="1608050854156">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="scopes/0.0.1536.824@0.0.1536.824" timestamp="1608050854156" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606898279893">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1608929443234">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606898279893" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1608929443234" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SSLab2F$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1608100463629" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/SSLab2F$FSM.coverage" NAME="FSM Coverage Results" MODIFIED="1608103129272" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SSLab2F$lexer.coverage" NAME="lexer Coverage Results" MODIFIED="1608590110855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SSLab2F$test_range.coverage" NAME="test_range Coverage Results" MODIFIED="1609016007704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SSLab2F$FSM.coverage" NAME="FSM Coverage Results" MODIFIED="1609080861678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SSLab2F$test.coverage" NAME="test Coverage Results" MODIFIED="1606851117336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -1,4 +1,6 @@
 import lexer
+import test_range
+import re
 alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&|+?.{}()<>$"
 state_id = 0
 
@@ -53,6 +55,7 @@ class FSM:
         return s
 
     def wrap(self, regex):
+        regex = test_range.preprocess(regex)
         ls = []
         lexer.lexer.input(regex)
         for token in lexer.lexer:
@@ -70,7 +73,7 @@ class FSM:
                     c += 1
 
         self.rt_node = lexer.process_in_paren(ls)[0]
-        #lexer.dfs(self.rt_node)
+        #lexer.dfs_start(self.rt_node)
         lexer.create_nullable_rec(self.rt_node)
         lexer.create_first_rec(self.rt_node)
         lexer.create_last_rec(self.rt_node)
@@ -110,13 +113,69 @@ class FSM:
             if EOS_pos in st1:
                 self.add_receiver_state(st1)
 
+def findall(regex, data):
+    return findall_rec(regex, data, [])
 
-aut = FSM()
-template = 'me+|p(hi)+x?'
-aut.wrap('('+template+')$')         # add (...)$ in preprocessing
-aut.create_fsm_from_F_FP()
-aut.string_input("me")
-print(aut.in_receiver_state())
+def findall_rec(regex, data, match_list):
+    for i in range(len(data)):
+        for j in range(len(data)+1, i, -1):
+            aut = FSM()
+            aut.wrap('('+regex+')$')
+            aut.create_fsm_from_F_FP()
+            aut.string_input(data[i:j])
+            if aut.in_receiver_state():
+                #print("match: " + data[i:j])
+                match_list.append(data[i:j])
+                data = data[:i] + data[j:]
+                #print("New data: " + data)
+                return findall_rec(regex, data, match_list)
+    return match_list
+
+# aut = FSM()
+# #template = 'me+|p(hi)+x?'
+# template = r'meph(it|m(hi)*){2,5}'
+# aut.wrap('('+template+')$')
+# aut.create_fsm_from_F_FP()
+# aut.string_input()
+# print(aut.in_receiver_state())
+
+
+print(findall(r'me|p(hi)*', 'phimepyfgppphihihihi'))
+test = ["hellhellword", "hellohellowordword", "oowordwordword", "hellhe"]
+for string in test:
+    print(string)
+    print(findall(r'(<a>(hel(l|lo)|o+))<a>(word){1,3}', string))
+    print("------------------------------")
+
+test = ["ababx","abaoabo", "aabaabxx", "ooxxx", "x", "ababxxadd", "ababxxlol", "oo", "aababxxxxadd", "aabaabxxaddlol",
+        "abadd", "ababadd", "oooo", "abx"]
+for string in test:
+    print(string)
+    res = findall(r'(<a>(a(b|ab)|o+))<a>(x){,3}(add|lol)?', string)
+    if len(res) == 1 and res[0] == string:
+        print("Valid")
+    else:
+        print("Invalid")
+    print("------------------------------")
+
+print("!!!FINDALL!!!")
+test = ["aaa9", "aab9aaa9", "aabaaacbcbhello", "aab9aaa9|"]
+for string in test:
+    print(findall(r"aa(a|b)9?(cb|cbcb)?(&|)?", string))
+
+
+#print(findall(r'(<a>(a|b))<a>', 'aa'))     #r'(a|b)(a|b)'
+# to_check = ['meph']
+# for el in to_check:
+#     aut = FSM()
+#     #template = 'me+|p(hi)+x?'
+#     template = r'meph(it|m(hi)*){2,5}'
+#     aut.wrap('('+template+')$')
+#     aut.create_fsm_from_F_FP()
+#     aut.string_input(el)
+#     print(el)
+#     print(aut.in_receiver_state())
+#     print('--------------------------------------------------------------------')
 #for key in aut.FP:
 #    print(key)
 #    print(aut.FP[key])
